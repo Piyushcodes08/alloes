@@ -1,0 +1,77 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100..900;1,100..900&display=swap');
+@import "tailwindcss";
+
+@theme {
+  /* Typography */
+  --font-sans: "Poppins", system-ui, -apple-system, sans-serif;
+  --font-headline: "Montserrat", sans-serif;
+  --font-montserrat: "Montserrat", sans-serif;
+  --font-poppins: "Poppins", sans-serif;
+
+  /* Color Palette - Premium Emerald & Champagne Gold Theme */
+  --color-primary: #0C2D25;                /* Royal Emerald Green */
+  --color-primary-container: #051A14;      /* Deepest Velvet Emerald */
+  --color-secondary: #DFBA83;              /* Lustrous Champagne Gold */
+  --color-secondary-container: #F4EFE6;    /* Warm Silk Beige */
+  --color-trust-gold: #C5A880;             /* Brushed Brass Accent */
+  --color-background: #FAF9F6;             /* Royal Alabaster White background */
+  
+  --color-on-surface-variant: #1F2E2A;     /* Deep forest coal text */
+  --color-outline-variant: #EDE9E1;        /* Champagne-toned borders */
+  --color-text-muted: #647570;             /* Sophisticated muted forest gray */
+}
+
+body {
+  background-color: var(--color-background);
+  color: #1F2E2A;
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Theme utility classes mapping to CSS variables for consistent use */
+.text-primary { color: var(--color-primary); }
+.bg-primary { background-color: var(--color-primary); }
+.bg-primary-container { background-color: var(--color-primary-container); }
+.text-trust-gold { color: var(--color-trust-gold); }
+.bg-trust-gold { background-color: var(--color-trust-gold); }
+.bg-secondary { background-color: var(--color-secondary); }
+.bg-secondary-container { background-color: var(--color-secondary-container); }
+.text-text-muted { color: var(--color-text-muted); }
+.text-on-surface-variant { color: var(--color-on-surface-variant); }
+.border-outline-variant { border-color: var(--color-outline-variant); }
+.border-primary { border-color: var(--color-primary); }
+.shadow-xs { box-shadow: 0 1px 6px rgba(3,20,16,0.04); }
+.w-full-max { max-width: 1440px; }
+
+/* Hero gradient based on theme colors for consistent cinematic veil */
+.hero-gradient {
+  background: linear-gradient(90deg, rgba(3,20,16,0.95) 0%, rgba(4,31,24,0.7) 40%, rgba(3,20,16,0.4) 100%);
+}
+
+/* Utility to hide scrollbar for modern browsers */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* Custom styles for neat scrollbars inside product modals & cart sidebars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(1, 45, 29, 0.15);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(1, 45, 29, 0.3);
+}
+
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}

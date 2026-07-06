@@ -1,0 +1,6 @@
+{
+  "name": "Alloes Pharmaceuticals",
+  "description": "Storefront for Alloes Pharmaceuticals featuring premium ayurvedic skin care, hair care, health, and bathing solutions.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
