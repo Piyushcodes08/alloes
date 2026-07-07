@@ -1,29 +1,30 @@
 import { Product, QuizQuestion } from './types';
+import { categoryImages, productImages } from './imageAssets';
 
 export const CATEGORIES = [
   {
     id: 'skin',
     name: 'Skin Care',
     subtitle: 'Dermatologically Tested',
-    image: '/src/assets/images/skin_care_category_1783355322501.jpg'
+    image: categoryImages.skinCare
   },
   {
     id: 'hair',
     name: 'Hair Care',
     subtitle: 'Nourish From Root',
-    image: '/src/assets/images/hair_care_category_1783355339693.jpg'
+    image: categoryImages.hairCare
   },
   {
     id: 'health',
     name: 'Health',
     subtitle: 'Holistic Vitality',
-    image: '/src/assets/images/health_category_1783355355143.jpg'
+    image: categoryImages.health
   },
   {
     id: 'bathing',
     name: 'Bathing',
     subtitle: 'Pure Cleansing',
-    image: '/src/assets/images/bathing_category_1783355371980.jpg'
+    image: categoryImages.bathing
   }
 ] as const;
 
@@ -35,7 +36,7 @@ export const PRODUCTS: Product[] = [
     price: 150.00,
     originalPrice: 199.00,
     discount: 25,
-    image: '/src/assets/images/keto_shampoo_1783364304094.jpg',
+    image: productImages.ketoShampoo,
     description: 'An advanced, clinically-proven anti-dandruff formulation with 2% Ketoconazole. It targets the root cause of dandruff, alleviates scalp itchiness, and checks flake recurrence while remaining gentle on hair strands.',
     ingredients: ['Ketoconazole 2% w/v', 'Purified Water', 'Sodium Laureth Sulfate', 'Cocamidopropyl Betaine', 'Fragrance', 'Citric Acid'],
     scientificBenefits: 'Inhibits fungal synthesis in Malassezia species, effectively lowering flaking indices by 84% in clinical trials with zero residual dryness.',
@@ -55,7 +56,7 @@ export const PRODUCTS: Product[] = [
     price: 310.00,
     originalPrice: 380.00,
     discount: 18,
-    image: '/src/assets/images/bhringraj_oil_1783364316520.jpg',
+    image: productImages.bhringrajOil,
     description: 'A classical Ayurvedic formulation enriched with hand-pressed Bhringraj extract, Sesame oil, and rare Himalayan herbs. It vitalizes hair follicles, prevents premature graying, and promotes rich, dense hair growth.',
     ingredients: ['Bhringraj extract (Eclipta Alba)', 'Sesame Oil', 'Coconut Oil', 'Amala', 'Mulethi', 'Neem Leaf extract'],
     scientificBenefits: 'Promotes follicular proliferation by activating beta-catenin pathways. Studies show a 32% increase in active hair shaft diameter over 12 weeks of standard usage.',
@@ -75,7 +76,7 @@ export const PRODUCTS: Product[] = [
     price: 179.00,
     originalPrice: 239.00,
     discount: 25,
-    image: '/src/assets/images/ketoclean_plus_1783364327865.jpg',
+    image: productImages.ketocleanPlus,
     description: 'Synergistic double-action therapeutic shampoo combining Climbazole and ZPTO. It controls severe seborrheic dermatitis, flaky build-up, and persistent itching while conditioning the scalp ecosystem.',
     ingredients: ['Climbazole 1% w/v', 'Zinc Pyrithione (ZPTO) 1% w/v', 'Aloe Vera Gel', 'Pro-Vitamin B5', 'Coco-Glucoside'],
     scientificBenefits: 'Dual-active synthesis disrupts fungal cell membrane stability, delivering a 2x faster reduction in dandruff recurrence compared to standard single-active formulations.',
@@ -94,7 +95,7 @@ export const PRODUCTS: Product[] = [
     price: 249.00,
     originalPrice: 299.00,
     discount: 17,
-    image: '/src/assets/images/ketoclean_pro_1783364339378.jpg',
+    image: productImages.ketocleanPro,
     description: 'Premium pharmaceutical hair wash powered by Fluidipure 8G, salicylic acid, and botanical scalp purifiers. It limits sebum hyper-production and controls stubborn yeast strains while restoring natural hair shine.',
     ingredients: ['Fluidipure 8G', 'Salicylic Acid 2%', 'Rosemary Oil', 'Tea Tree extract', 'Hydrolyzed Wheat Protein'],
     scientificBenefits: 'Fluidipure 8G biomimetic sugar acid decreases sebum secretion by 38% and significantly counters scalp irritation, strengthening the cutaneous barrier.',
@@ -114,7 +115,7 @@ export const PRODUCTS: Product[] = [
     price: 165.00,
     originalPrice: 199.00,
     discount: 17,
-    image: '/src/assets/images/sleepwell_spray_1783364351046.jpg',
+    image: productImages.sleepwellSpray,
     description: 'Fast-absorbing sublingual melatonin spray combined with Chamomile and Valerian root. It naturally calms the nervous system, supports healthy sleep cycles, and helps tackle jet lag without next-day drowsiness.',
     ingredients: ['Melatonin (Pharma Grade)', 'Chamomile extract', 'Valerian Root', 'L-Theanine', 'Peppermint oil', 'Purified Water'],
     scientificBenefits: 'Sublingual oral spray form allows immediate mucosal absorption, bypassing the first-pass hepatic metabolism for a 4x quicker onset of calm sleep than standard oral pills.',
@@ -171,7 +172,7 @@ export const PRODUCTS: Product[] = [
     price: 110.00,
     originalPrice: 135.00,
     discount: 18,
-    image: '/src/assets/images/scabit_soap_1783364391597.jpg',
+    image: productImages.scabitSoap,
     description: 'Medicated Permethrin bathing soap expertly formulated for skin parasite control, itch relief, and deep hygiene. Blended with skin-soothing aloe vera to prevent post-bath dryness.',
     ingredients: ['Permethrin 1% w/w', 'Soap Base q.s.', 'Aloe Vera Gel', 'Glycerin', 'Titanium Dioxide'],
     scientificBenefits: 'Permethrin paralyzes the nervous system of external dermal micro-parasites, clearing skin infestations while glycerin maintains moisture equilibrium.',
@@ -189,7 +190,7 @@ export const PRODUCTS: Product[] = [
     price: 199.00,
     originalPrice: 249.00,
     discount: 20,
-    image: '/src/assets/images/aloe_saffron_gel_1783364401182.jpg',
+    image: productImages.aloeSaffronGel,
     description: 'A luxurious dermatologically-tested face gel combining pure cold-pressed Aloe Vera pulp with premium Kashmiri Saffron. It hydrates deep into skin cells, fades blemishes, and unlocks a natural golden glow.',
     ingredients: ['Pure Aloe Vera Gel 90%', 'Kashmiri Saffron (Crocus Sativus) extract', 'Vitamin E', 'Tea Tree oil', 'Hyaluronic Acid'],
     scientificBenefits: 'Crocin in saffron serves as a natural antioxidant block, neutralizing UV-induced cellular degradation and reducing melanin indices by 21%.',

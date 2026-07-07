@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
+// import bg1 from './assets/bg-1.png';
 import {
   Sparkles,
   ArrowRight,
@@ -32,6 +33,7 @@ import Toast from './components/Toast';
 
 import { PRODUCTS, CATEGORIES } from './data';
 import { Product, CartItem, ToastMessage, Review } from './types';
+import { heroImages } from './imageAssets';
 
 const HERO_SLIDES = [
   {
@@ -39,9 +41,9 @@ const HERO_SLIDES = [
     title: "Pure Saffron.\nNatural Radiance.",
     subtitle: "Aloe Saffron Pure Skin Gel",
     description: "Experience deep, golden cellular hydration with 90% pure organic cold-pressed Aloe Vera pulp infused with hand-selected Kashmiri Saffron and rich Vitamin E.",
-    bgImage: "src/assets/bg-1.png",
+    bgImage: heroImages.bg1,
     productId: "prod-aloesaffron",
-    productImage: "src/assets/product.png",
+    productImage: heroImages.product1,
     badgeText: "3000 PPM PURITY",
     scientificNote: "Crocin in saffron serves as a natural antioxidant block, neutralizing UV-induced cellular degradation and reducing melanin indices by 21%.",
     features: ["Certified Organic", "Clinically Approved"]
@@ -51,9 +53,9 @@ const HERO_SLIDES = [
     title: "Root Vitality.\nScalp Rebirth.",
     subtitle: "Ketoconazole 2% Shampoo",
     description: "Eliminate stubborn dandruff and halt hair fall. Powered by clinical 2% Ketoconazole to clear fungus, reduce flaking, and restore deep follicular health.",
-    bgImage: "src/assets/bg-2.png",
+    bgImage: heroImages.bg2,
     productId: "prod-keto-2",
-    productImage: "src/assets/product-2.png",
+    productImage: heroImages.product2,
     badgeText: "STOPS FLAKING AT ROOT",
     scientificNote: "Inhibits fungal synthesis in Malassezia species, lowering flaking indices by 84% in clinical trials with zero residual dryness.",
     features: ["Fights Yeast", "Restores Cuticle"]
@@ -63,9 +65,9 @@ const HERO_SLIDES = [
     title: "Inner Harmony.\nGut Vitality.",
     subtitle: "Kabz Safa Digestion Blend",
     description: "Expertly formulated with standardized Senna leaves, Haritaki, and Ajwain to naturally relieve acute constipation, bloating, and support intestinal detox.",
-    bgImage: "src/assets/bg-3.png",
+    bgImage: heroImages.bg3,
     productId: "prod-kabz-safa",
-    productImage: "src/assets/product-3.png",
+    productImage: heroImages.product3,
     badgeText: "100% HERBAL EXTRACT",
     scientificNote: "Standardized sennosides stimulate peristaltic muscular contractions of the colon, providing gentle overnight relief.",
     features: ["Non-Habit Forming", "Overnight Relief"]
