@@ -97,7 +97,9 @@ export default function App() {
 
   // Hero Slider State & Autoplay
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [isAutoplayPaused, setIsAutoplayPaused] = useState(false);
+  const [isHoverPaused, setIsHoverPaused] = useState(false);
+  const [isManualPaused, setIsManualPaused] = useState(false);
+  const isAutoplayPaused = isHoverPaused || isManualPaused;
   const bestSellersRef = useRef<HTMLDivElement | null>(null);
 
   const catalogueRef = useRef<HTMLDivElement | null>(null);
@@ -116,13 +118,36 @@ export default function App() {
     container.scrollBy({ left: direction === 'right' ? amount : -amount, behavior: 'smooth' });
   };
 
+  const goToSlide = (index: number) => {
+    setCurrentSlide(index);
+    setIsManualPaused(true);
+  };
+
+  const goToNextSlide = () => {
+    setCurrentSlide((prev) => (prev + 1) % HERO_SLIDES.length);
+    setIsManualPaused(true);
+  };
+
+  const goToPrevSlide = () => {
+    setCurrentSlide((prev) => (prev - 1 + HERO_SLIDES.length) % HERO_SLIDES.length);
+    setIsManualPaused(true);
+  };
+
   useEffect(() => {
     if (isAutoplayPaused) return;
     const interval = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % 3);
+      setCurrentSlide((prev) => (prev + 1) % HERO_SLIDES.length);
     }, 6000);
     return () => clearInterval(interval);
   }, [isAutoplayPaused]);
+
+  useEffect(() => {
+    if (!isManualPaused) return;
+    const timer = window.setTimeout(() => {
+      setIsManualPaused(false);
+    }, 8000);
+    return () => window.clearTimeout(timer);
+  }, [isManualPaused]);
 
   // Contact form state
   const [contactName, setContactName] = useState('');
@@ -296,8 +321,8 @@ export default function App() {
 
       {/* HERO HERO SECTION WITH ANIMATED SLIDER */}
       <section 
-        onMouseEnter={() => setIsAutoplayPaused(true)}
-        onMouseLeave={() => setIsAutoplayPaused(false)}
+        onMouseEnter={() => setIsHoverPaused(true)}
+        onMouseLeave={() => setIsHoverPaused(false)}
         className="relative w-full min-h-[70vh] md:min-h-[85vh] lg:h-[90vh] overflow-hidden border-b border-outline-variant"
       >
         {/* Cinematic Animated Background Slider */}
@@ -443,10 +468,7 @@ export default function App() {
           {HERO_SLIDES.map((_, idx) => (
             <button
               key={idx}
-              onClick={() => {
-                setIsAutoplayPaused(true);
-                setCurrentSlide(idx);
-              }}
+              onClick={() => goToSlide(idx)}
               className="group relative flex items-center h-8 transition-all cursor-pointer"
             >
               <div className="flex items-center gap-2">
@@ -471,6 +493,23 @@ export default function App() {
               </div>
             </button>
           ))}
+        </div>
+
+        <div className="absolute bottom-6 right-6 md:right-16 z-30 flex items-center gap-2">
+          <button
+            onClick={goToPrevSlide}
+            className="flex h-10 w-10 items-center justify-center rounded-full border border-white/20 bg-white/10 text-white backdrop-blur-sm transition hover:bg-white/20"
+            aria-label="Previous slide"
+          >
+            <ChevronLeft className="h-5 w-5" />
+          </button>
+          <button
+            onClick={goToNextSlide}
+            className="flex h-10 w-10 items-center justify-center rounded-full border border-white/20 bg-white/10 text-white backdrop-blur-sm transition hover:bg-white/20"
+            aria-label="Next slide"
+          >
+            <ChevronRight className="h-5 w-5" />
+          </button>
         </div>
       </section>
 
