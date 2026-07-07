@@ -5,22 +5,22 @@ import heroProduct1 from './assets/product.png';
 import heroProduct2 from './assets/product-2.png';
 import heroProduct3 from './assets/product-3.png';
 
-import skinCareCategory from './assets/images/p1.jpg';
-import hairCareCategory from './assets/images/p2.jpg';
-import healthCategory from './assets/images/p3.jpg';
-import bathingCategory from './assets/images/p4.jpg';
+const skinCareCategory = '/images/p1.jpg';
+const hairCareCategory = '/images/p2.jpg';
+const healthCategory = '/images/p3.jpg';
+const bathingCategory = '/images/p4.jpg';
 
-import ketoShampoo from './assets/images/p5.jpg';
-import bhringrajOil from './assets/images/p6.jpg';
-import ketocleanPlus from './assets/images/p7.jpg';
-import ketocleanPro from './assets/images/p8.jpg';
-import sleepwellSpray from './assets/images/p9.jpg';
-import kabzSafa from './assets/images/p10.jpg';
-import multivitaminsWomen from './assets/images/p11.jpg';
-import scabitSoap from './assets/images/p12.jpg';
-import aloeSaffronGel from './assets/images/p13.jpg';
-import radiantSkinBeauty from './assets/images/p14.jpg';
-import organicLabHero from './assets/images/p15.jpg';
+const ketoShampoo = '/images/p5.jpg';
+const bhringrajOil = '/images/p6.jpg';
+const ketocleanPlus = '/images/p7.jpg';
+const ketocleanPro = '/images/p8.jpg';
+const sleepwellSpray = '/images/p9.jpg';
+const kabzSafa = '/images/p10.jpg';
+const multivitaminsWomen = '/images/p11.jpg';
+const scabitSoap = '/images/p12.jpg';
+const aloeSaffronGel = '/images/p13.jpg';
+const radiantSkinBeauty = '/images/p14.jpg';
+const organicLabHero = '/images/p15.jpg';
 
 export const heroImages = {
   bg1: heroBg1,

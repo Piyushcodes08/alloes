@@ -35,6 +35,8 @@ import { PRODUCTS, CATEGORIES } from './data';
 import { Product, CartItem, ToastMessage, Review } from './types';
 import { heroImages, productImages } from './imageAssets';
 
+type PersistedCartItem = { productId?: string; quantity: number; product?: { id: string } };
+
 const HERO_SLIDES = [
   {
     badge: "EST. 2014 • DERMATOLOGIST RECOMMENDED",
@@ -81,7 +83,20 @@ export default function App() {
   // Cart State (loaded from localStorage if present)
   const [cart, setCart] = useState<CartItem[]>(() => {
     const saved = localStorage.getItem('alloes_cart');
-    return saved ? JSON.parse(saved) : [];
+    if (!saved) return [];
+
+    try {
+      const persisted: PersistedCartItem[] = JSON.parse(saved);
+      return persisted
+        .map((item) => {
+          const productId = item.productId ?? item.product?.id;
+          const product = productId ? PRODUCTS.find((product) => product.id === productId) : undefined;
+          return product ? { product, quantity: item.quantity } : null;
+        })
+        .filter((item): item is CartItem => Boolean(item));
+    } catch {
+      return [];
+    }
   });
 
   // Modal and drawer controls
@@ -144,7 +159,12 @@ export default function App() {
 
   // Local storage synchronization
   useEffect(() => {
-    localStorage.setItem('alloes_cart', JSON.stringify(cart));
+    const persisted = cart.map((item) => ({
+      productId: item.product.id,
+      quantity: item.quantity,
+    }));
+
+    localStorage.setItem('alloes_cart', JSON.stringify(persisted));
   }, [cart]);
 
   // Toast Helpers
