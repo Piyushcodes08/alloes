@@ -30,6 +30,12 @@ interface DropdownItem {
 }
 
 const DRAG_DROPDOWN_DATA: Record<string, DropdownItem[]> = {
+  about: [
+    { name: 'Our Story', action: 'story' },
+    { name: 'Our Mission', action: 'story' },
+    { name: 'Certifications & Quality', action: 'story' },
+    { name: 'Meet The Team', action: 'story' }
+  ],
   skin: [
     { name: 'Moisturizer', categoryId: 'skin', searchKeyword: 'Moisturizer' },
     { name: 'Serums', categoryId: 'skin', searchKeyword: 'Serum' },
@@ -56,7 +62,7 @@ const DRAG_DROPDOWN_DATA: Record<string, DropdownItem[]> = {
     { name: 'Antibiotic', categoryId: 'all', searchKeyword: 'Antibiotic' },
     { name: 'Anti Fungal', categoryId: 'all', searchKeyword: 'Anti Fungal' },
     { name: 'Antiseptic Modic', categoryId: 'all', searchKeyword: 'Antiseptic' },
-    { name: 'B\'Witte Group', categoryId: 'all', searchKeyword: 'B-Witte' },
+    { name: "B'Witte Group", categoryId: 'all', searchKeyword: 'B-Witte' },
     { name: 'Cough & Cold Range', categoryId: 'all', searchKeyword: 'Cough' },
     { name: 'Health Tonic', categoryId: 'all', searchKeyword: 'Tonic' },
     { name: 'Deal Of The Day', categoryId: 'all', searchKeyword: 'Combo' },
@@ -64,6 +70,18 @@ const DRAG_DROPDOWN_DATA: Record<string, DropdownItem[]> = {
     { name: 'New Products', categoryId: 'all', searchKeyword: 'Alloes' },
     { name: 'Oral Care', categoryId: 'all', searchKeyword: 'Oral' },
     { name: 'Pediatric Range', categoryId: 'all', searchKeyword: 'Baby' }
+  ],
+  blog: [
+    { name: 'Skin Care Tips', action: 'blog' },
+    { name: 'Hair Care Tips', action: 'blog' },
+    { name: 'Ayurvedic Wellness', action: 'blog' },
+    { name: 'Patient Success Stories', action: 'blog' },
+    { name: 'View All Articles', action: 'blog' }
+  ],
+  track: [
+    { name: 'Track My Order', action: 'track' },
+    { name: 'Order History', action: 'track' },
+    { name: 'Return & Refund', action: 'track' }
   ]
 };
 
@@ -150,6 +168,21 @@ export default function Header({
   const handleDropdownItemClick = (item: DropdownItem) => {
     if (item.productId) {
       handleProductClick(item.productId);
+    } else if (item.action === 'story') {
+      onStoryToggle();
+      setActiveDropdown(null);
+      setIsMobileMenuOpen(false);
+      setMobileSubmenuOpen(null);
+    } else if (item.action === 'blog') {
+      setIsBlogOpen(true);
+      setActiveDropdown(null);
+      setIsMobileMenuOpen(false);
+      setMobileSubmenuOpen(null);
+    } else if (item.action === 'track') {
+      setIsTrackOrderOpen(true);
+      setActiveDropdown(null);
+      setIsMobileMenuOpen(false);
+      setMobileSubmenuOpen(null);
     } else if (item.searchKeyword) {
       onCategorySelect(item.categoryId || 'all');
       onSearchChange(item.searchKeyword);
@@ -209,19 +242,28 @@ export default function Header({
 
               {/* Desktop Navigation */}
               <nav className="hidden md:flex items-center space-x-4 lg:space-x-7 relative">
-                {/* About Us */}
-                <button
-                  onClick={onStoryToggle}
-                  className="relative py-1.5 font-headline text-[11px] lg:text-[12px] font-bold text-white/90 hover:text-[#E4C97F] transition-all select-none cursor-pointer uppercase tracking-wider"
-                >
-                  About Us
-                </button>
-
-                {/* Categories with Dropdowns */}
-                {['skin', 'hair', 'health', 'bathing', 'shop'].map((key) => {
-                  const label = key === 'skin' ? 'Skin Care' : key === 'hair' ? 'Hair Care' : key === 'health' ? 'Health' : key === 'bathing' ? 'Bathing' : 'Shop';
+                {/* All nav items rendered uniformly with classic dropdowns */}
+                {[
+                  { key: 'about', label: 'About Us' },
+                  { key: 'skin', label: 'Skin Care' },
+                  { key: 'hair', label: 'Hair Care' },
+                  { key: 'health', label: 'Health' },
+                  { key: 'bathing', label: 'Bathing' },
+                  { key: 'shop', label: 'Shop' },
+                  { key: 'blog', label: 'Blog' },
+                  { key: 'track', label: 'Track Order' }
+                ].map(({ key, label }) => {
                   const isCatActive = activeCategory === key;
-                  
+                  const isOpen = activeDropdown === key;
+
+                  const handleMainClick = () => {
+                    if (key === 'about') onStoryToggle();
+                    else if (key === 'blog') setIsBlogOpen(true);
+                    else if (key === 'track') setIsTrackOrderOpen(true);
+                    else if (key === 'shop') handleNavClick('all');
+                    else handleNavClick(key);
+                  };
+
                   return (
                     <div
                       key={key}
@@ -229,62 +271,51 @@ export default function Header({
                       onMouseLeave={() => setActiveDropdown(null)}
                       className="relative py-3 group"
                     >
+                      {/* Nav trigger button */}
                       <button
-                        onClick={() => key !== 'shop' ? handleNavClick(key) : handleNavClick('all')}
+                        onClick={handleMainClick}
                         className="flex items-center gap-0.5 font-headline text-[11px] lg:text-[12px] font-bold text-white/90 hover:text-[#E4C97F] transition-colors uppercase tracking-wider select-none cursor-pointer"
                       >
                         <span className={isCatActive ? 'text-[#E4C97F] font-black' : ''}>
                           {label}
                         </span>
-                        <ChevronDown className={`w-3 h-3 transition-transform duration-300 ${activeDropdown === key ? 'rotate-180 text-[#E4C97F]' : 'text-white/40 group-hover:text-[#E4C97F]'}`} />
+                        <ChevronDown
+                          className={`w-3 h-3 ml-0.5 transition-transform duration-300 ${
+                            isOpen ? 'rotate-180 text-[#E4C97F]' : 'text-white/40 group-hover:text-[#E4C97F]'
+                          }`}
+                        />
                       </button>
 
-                      {/* Dropdown Panel */}
+                      {/* Classic Dropdown Panel */}
                       <AnimatePresence>
-                        {activeDropdown === key && (
+                        {isOpen && (
                           <motion.div
-                            initial={{ opacity: 0, y: 10, scale: 0.97 }}
+                            initial={{ opacity: 0, y: 8, scale: 0.97 }}
                             animate={{ opacity: 1, y: 0, scale: 1 }}
-                            exit={{ opacity: 0, y: 6, scale: 0.97 }}
-                            transition={{ duration: 0.18, ease: 'easeOut' }}
-                            className="absolute left-1/2 -translate-x-1/2 top-full mt-1 w-64 bg-white rounded-xl shadow-2xl border border-[#E4C97F]/20 p-2 z-50 text-left space-y-0.5"
+                            exit={{ opacity: 0, y: 5, scale: 0.97 }}
+                            transition={{ duration: 0.16, ease: 'easeOut' }}
+                            className="absolute left-1/2 -translate-x-1/2 top-full mt-0 min-w-[200px] bg-[#06241C] rounded-xl shadow-2xl border border-[#E4C97F]/20 overflow-hidden z-50"
                           >
-                            {DRAG_DROPDOWN_DATA[key].map((item, idx) => (
-                              <button
-                                key={idx}
-                                onClick={() => handleDropdownItemClick(item)}
-                                className={`w-full text-left px-3.5 py-2.5 rounded-lg text-[11px] font-headline font-bold transition-all flex items-center justify-between ${
-                                  item.categoryId || item.scrollId
-                                    ? 'bg-[#06241C]/5 text-[#06241C] border border-[#06241C]/5 hover:bg-[#06241C]/10 hover:text-[#06241C]'
-                                    : 'text-gray-700 hover:bg-[#06241C]/5 hover:text-[#06241C]'
-                                }`}
-                              >
-                                <span>{item.name}</span>
-                                <ArrowRight className="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 transition-opacity text-[#06241C] shrink-0 ml-1" />
-                              </button>
-                            ))}
+                            {/* Caret triangle */}
+                            <div className="absolute -top-[6px] left-1/2 -translate-x-1/2 w-3 h-3 bg-[#06241C] border-l border-t border-[#E4C97F]/20 rotate-45" />
+                            <div className="py-1.5 px-1.5 space-y-0.5">
+                              {DRAG_DROPDOWN_DATA[key]?.map((item, idx) => (
+                                <button
+                                  key={idx}
+                                  onClick={() => handleDropdownItemClick(item)}
+                                  className="w-full text-left px-4 py-2.5 rounded-lg text-[11px] font-headline font-bold text-white/80 hover:bg-[#E4C97F]/10 hover:text-[#E4C97F] transition-all flex items-center justify-between group/item cursor-pointer tracking-wide uppercase"
+                                >
+                                  <span>{item.name}</span>
+                                  <ArrowRight className="w-3 h-3 text-[#E4C97F]/0 group-hover/item:text-[#E4C97F] transition-colors shrink-0 ml-3" />
+                                </button>
+                              ))}
+                            </div>
                           </motion.div>
                         )}
                       </AnimatePresence>
                     </div>
                   );
                 })}
-
-                {/* Blog Link */}
-                <button
-                  onClick={() => setIsBlogOpen(true)}
-                  className="relative py-1.5 font-headline text-[11px] lg:text-[12px] font-bold text-white/90 hover:text-[#E4C97F] transition-all select-none cursor-pointer uppercase tracking-wider flex items-center gap-1"
-                >
-                  <span>Blog</span>
-                </button>
-
-                {/* Track Order Link */}
-                <button
-                  onClick={() => setIsTrackOrderOpen(true)}
-                  className="relative py-1.5 font-headline text-[11px] lg:text-[12px] font-bold text-white/90 hover:text-[#E4C97F] transition-all select-none cursor-pointer uppercase tracking-wider flex items-center gap-1"
-                >
-                  <span>Track Order</span>
-                </button>
               </nav>
 
               {/* Right Interactions */}
@@ -414,37 +445,39 @@ export default function Header({
 
               {/* Navigation Links */}
               <div className="flex flex-col gap-1.5 font-headline font-bold text-xs uppercase tracking-wider text-white">
-                {/* About Us */}
-                <button
-                  onClick={() => {
-                    onStoryToggle();
-                    setIsMobileMenuOpen(false);
-                  }}
-                  className="text-left p-2.5 rounded-lg hover:bg-white/5 text-white/80 hover:text-[#E4C97F] transition-colors"
-                >
-                  About Us
-                </button>
-
-                {/* Interactive Submenus for Categories on Mobile */}
-                {['skin', 'hair', 'health', 'bathing', 'shop'].map((key) => {
-                  const label = key === 'skin' ? 'Skin Care' : key === 'hair' ? 'Hair Care' : key === 'health' ? 'Health' : key === 'bathing' ? 'Bathing' : 'Shop';
+                {/* All mobile nav items with accordions */}
+                {[
+                  { key: 'about', label: 'About Us' },
+                  { key: 'skin', label: 'Skin Care' },
+                  { key: 'hair', label: 'Hair Care' },
+                  { key: 'health', label: 'Health' },
+                  { key: 'bathing', label: 'Bathing' },
+                  { key: 'shop', label: 'Shop' },
+                  { key: 'blog', label: 'Blog Journal' },
+                  { key: 'track', label: 'Track Order' }
+                ].map(({ key, label }) => {
                   const isSubOpen = mobileSubmenuOpen === key;
-                  
+                  const isCatActive = activeCategory === key;
+
                   return (
                     <div key={key} className="space-y-1">
                       <button
                         onClick={() => setMobileSubmenuOpen(isSubOpen ? null : key)}
                         className={`w-full text-left p-2.5 rounded-lg flex items-center justify-between hover:bg-white/5 transition-colors ${
-                          activeCategory === key ? 'text-[#E4C97F] bg-white/5' : 'text-white/80 hover:text-[#E4C97F]'
+                          isCatActive ? 'text-[#E4C97F] bg-white/5' : 'text-white/80 hover:text-[#E4C97F]'
                         }`}
                       >
                         <span>{label}</span>
-                        <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${isSubOpen ? 'rotate-180 text-[#E4C97F]' : ''}`} />
+                        <ChevronDown
+                          className={`w-4 h-4 transition-transform duration-200 ${
+                            isSubOpen ? 'rotate-180 text-[#E4C97F]' : ''
+                          }`}
+                        />
                       </button>
 
                       {isSubOpen && (
                         <div className="pl-4 py-1 flex flex-col gap-1 bg-white/5 rounded-lg">
-                          {DRAG_DROPDOWN_DATA[key].map((item, idx) => (
+                          {DRAG_DROPDOWN_DATA[key]?.map((item, idx) => (
                             <button
                               key={idx}
                               onClick={() => handleDropdownItemClick(item)}
@@ -459,28 +492,6 @@ export default function Header({
                     </div>
                   );
                 })}
-
-                {/* Blog Link */}
-                <button
-                  onClick={() => {
-                    setIsBlogOpen(true);
-                    setIsMobileMenuOpen(false);
-                  }}
-                  className="text-left p-2.5 rounded-lg hover:bg-white/5 text-white/80 hover:text-[#E4C97F] transition-colors flex items-center gap-1.5"
-                >
-                  <span>Blog Journal</span>
-                </button>
-
-                {/* Track Order Link */}
-                <button
-                  onClick={() => {
-                    setIsTrackOrderOpen(true);
-                    setIsMobileMenuOpen(false);
-                  }}
-                  className="text-left p-2.5 rounded-lg hover:bg-white/5 text-white/80 hover:text-[#E4C97F] transition-colors flex items-center gap-1.5"
-                >
-                  <span>Track Order</span>
-                </button>
                 
                 <button
                   onClick={() => {

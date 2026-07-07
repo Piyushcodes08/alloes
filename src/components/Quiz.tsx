@@ -192,7 +192,7 @@ export default function Quiz({ onAddToCart, onSelectProduct }: QuizProps) {
                   </button>
                   <button
                     onClick={() => onAddToCart(recommendation, 1)}
-                    className="flex-1 bg-white hover:bg-white/95 text-primary py-3 rounded-lg font-bold uppercase tracking-wider text-xs flex items-center justify-center gap-2 transition-colors shadow-md cursor-pointer"
+                    className="flex-1 bg-white hover:bg-white/95 text-primary py-3 px-[10px] rounded-lg font-bold uppercase tracking-wider text-xs flex items-center justify-center gap-2 transition-colors shadow-md cursor-pointer"
                   >
                     <ShoppingCart className="w-4 h-4 text-primary" />
                     Add Prescription - Rs. {recommendation.price.toFixed(2)}
