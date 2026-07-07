@@ -21,6 +21,10 @@
   --color-text-muted: #647570;             /* Sophisticated muted forest gray */
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   background-color: var(--color-background);
   color: #1F2E2A;

@@ -326,17 +326,17 @@ export default function App() {
 
       {/* HERO HERO SECTION WITH ANIMATED SLIDER */}
       <section 
-        className="relative w-full min-h-[70vh] md:min-h-[85vh] lg:h-[90vh] overflow-hidden border-b border-outline-variant flex flex-col"
+        className="relative w-full min-h-[70vh] md:min-h-[85vh] lg:h-[90vh] overflow-hidden border-b border-outline-variant flex flex-col bg-black"
       >
         {/* Cinematic Animated Background Slider */}
         <div className="absolute inset-0 z-0 select-none pointer-events-none">
           <AnimatePresence mode="wait">
             <motion.div
               key={currentSlide}
-              initial={{ opacity: 0, scale: 1.06 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.98 }}
-              transition={{ duration: 0.9, ease: "easeInOut" }}
+              initial={{ opacity: 0, scale: 1.06, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.98, y: -20 }}
+              transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1] }}
               className="absolute inset-0"
             >
               <img
@@ -359,10 +359,10 @@ export default function App() {
             <AnimatePresence mode="wait">
               <motion.div
                 key={currentSlide}
-                initial={{ opacity: 0, y: 25 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
+                initial={{ opacity: 0, x: -25, y: 30 }}
+                animate={{ opacity: 1, x: 0, y: 0 }}
+                exit={{ opacity: 0, x: 25, y: -20 }}
+                transition={{ duration: 0.85, ease: [0.22, 1, 0.36, 1] }}
                 className="space-y-4 md:space-y-6"
               >
                
@@ -396,7 +396,7 @@ export default function App() {
                       const prod = products.find(p => p.id === HERO_SLIDES[currentSlide].productId);
                       if (prod) handleAddToCart(prod, 1);
                     }}
-                    className="w-full sm:w-auto px-6 py-3 border border-outline-variant text-white hover:bg-white/10 active:scale-98 font-headline text-xs font-bold rounded-lg uppercase tracking-wider transition-all cursor-pointer flex items-center gap-2 justify-center"
+                    className="w-full sm:w-auto px-6 py-3 border border-outline-variant bg-black/10 text-white hover:bg-black/20 active:scale-98 font-headline text-xs font-bold rounded-lg uppercase tracking-wider transition-all cursor-pointer flex items-center gap-2 justify-center"
                   >
                     <ShoppingCart className="w-4 h-4 text-[#E4C97F]" />
                     Quick Add to Cart
@@ -482,7 +482,7 @@ export default function App() {
                 }`}>
                   0{idx + 1}
                 </span>
-                <div className="relative w-14 md:w-20 h-1 bg-white/15 rounded-full overflow-hidden">
+                <div className="relative w-14 md:w-20 h-1 bg-black/15 rounded-full overflow-hidden">
                   {currentSlide === idx && (
                     <motion.div
                       key={currentSlide}
@@ -504,14 +504,14 @@ export default function App() {
         <div className="absolute bottom-6 right-6 md:right-16 z-30 flex items-center gap-2">
           <button
             onClick={goToPrevSlide}
-            className="flex h-10 w-10 items-center justify-center rounded-full border border-white/20 bg-white/10 text-white backdrop-blur-sm transition hover:bg-white/20"
+            className="flex h-10 w-10 items-center justify-center rounded-full border border-white/20 bg-black/10 text-white backdrop-blur-sm transition hover:bg-black/20"
             aria-label="Previous slide"
           >
             <ChevronLeft className="h-5 w-5" />
           </button>
           <button
             onClick={goToNextSlide}
-            className="flex h-10 w-10 items-center justify-center rounded-full border border-white/20 bg-white/10 text-white backdrop-blur-sm transition hover:bg-white/20"
+            className="flex h-10 w-10 items-center justify-center rounded-full border border-white/20 bg-black/10 text-white backdrop-blur-sm transition hover:bg-black/20"
             aria-label="Next slide"
           >
             <ChevronRight className="h-5 w-5" />
