@@ -97,9 +97,6 @@ export default function App() {
 
   // Hero Slider State & Autoplay
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [isHoverPaused, setIsHoverPaused] = useState(false);
-  const [isManualPaused, setIsManualPaused] = useState(false);
-  const isAutoplayPaused = isHoverPaused || isManualPaused;
   const bestSellersRef = useRef<HTMLDivElement | null>(null);
 
   const catalogueRef = useRef<HTMLDivElement | null>(null);
@@ -120,34 +117,22 @@ export default function App() {
 
   const goToSlide = (index: number) => {
     setCurrentSlide(index);
-    setIsManualPaused(true);
   };
 
   const goToNextSlide = () => {
     setCurrentSlide((prev) => (prev + 1) % HERO_SLIDES.length);
-    setIsManualPaused(true);
   };
 
   const goToPrevSlide = () => {
     setCurrentSlide((prev) => (prev - 1 + HERO_SLIDES.length) % HERO_SLIDES.length);
-    setIsManualPaused(true);
   };
 
   useEffect(() => {
-    if (isAutoplayPaused) return;
     const interval = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % HERO_SLIDES.length);
-    }, 6000);
+    }, 5000);
     return () => clearInterval(interval);
-  }, [isAutoplayPaused]);
-
-  useEffect(() => {
-    if (!isManualPaused) return;
-    const timer = window.setTimeout(() => {
-      setIsManualPaused(false);
-    }, 8000);
-    return () => window.clearTimeout(timer);
-  }, [isManualPaused]);
+  }, [currentSlide]);
 
   // Contact form state
   const [contactName, setContactName] = useState('');
@@ -321,8 +306,6 @@ export default function App() {
 
       {/* HERO HERO SECTION WITH ANIMATED SLIDER */}
       <section 
-        onMouseEnter={() => setIsHoverPaused(true)}
-        onMouseLeave={() => setIsHoverPaused(false)}
         className="relative w-full min-h-[70vh] md:min-h-[85vh] lg:h-[90vh] overflow-hidden border-b border-outline-variant flex flex-col"
       >
         {/* Cinematic Animated Background Slider */}
@@ -482,10 +465,11 @@ export default function App() {
                 <div className="relative w-14 md:w-20 h-1 bg-white/15 rounded-full overflow-hidden">
                   {currentSlide === idx && (
                     <motion.div
+                      key={currentSlide}
                       initial={{ width: 0 }}
                       animate={{ width: "100%" }}
                       transition={{ 
-                        duration: isAutoplayPaused ? 0 : 6, 
+                        duration: 5, 
                         ease: "linear" 
                       }}
                       className="absolute left-0 top-0 bottom-0 bg-trust-gold"
