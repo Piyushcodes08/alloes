@@ -323,7 +323,7 @@ export default function App() {
       <section 
         onMouseEnter={() => setIsHoverPaused(true)}
         onMouseLeave={() => setIsHoverPaused(false)}
-        className="relative w-full min-h-[70vh] md:min-h-[85vh] lg:h-[90vh] overflow-hidden border-b border-outline-variant"
+        className="relative w-full min-h-[70vh] md:min-h-[85vh] lg:h-[90vh] overflow-hidden border-b border-outline-variant flex flex-col"
       >
         {/* Cinematic Animated Background Slider */}
         <div className="absolute inset-0 z-0 select-none pointer-events-none">
@@ -349,9 +349,10 @@ export default function App() {
         </div>
 
         {/* Slide Content Layout */}
-        <div className="relative z-10 px-6 md:px-16 max-w-[1440px] mx-auto w-full grid grid-cols-1 lg:grid-cols-[1.1fr_.9fr] items-center justify-items-center lg:justify-items-stretch gap-12 py-16 md:py-20">
+        <div className="relative z-10 flex-1 flex items-center px-6 md:px-16 pb-20">
+        <div className="max-w-[1440px] mx-auto w-full grid grid-cols-1 lg:grid-cols-[1.1fr_.9fr] items-center justify-items-center lg:justify-items-stretch gap-12 py-10 md:py-12">
           {/* Left Text Column with Entrance Animations */}
-          <div className="w-full lg:w-auto max-w-[640px] space-y-5 md:space-y-6 self-start  mx-auto lg:mx-0 text-center lg:text-left">
+          <div className="w-full lg:w-auto max-w-[640px] space-y-5 md:space-y-6 mx-auto lg:mx-0 text-center lg:text-left">
             <AnimatePresence mode="wait">
               <motion.div
                 key={currentSlide}
@@ -461,6 +462,7 @@ export default function App() {
     </motion.div>
   </AnimatePresence>
 </div>
+        </div>
         </div>
 
         {/* Dynamic Pagination Loader Bars */}
