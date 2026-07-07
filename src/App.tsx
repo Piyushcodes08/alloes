@@ -33,7 +33,7 @@ import Toast from './components/Toast';
 
 import { PRODUCTS, CATEGORIES } from './data';
 import { Product, CartItem, ToastMessage, Review } from './types';
-import { heroImages } from './imageAssets';
+import { heroImages, productImages } from './imageAssets';
 
 const HERO_SLIDES = [
   {
@@ -526,7 +526,7 @@ export default function App() {
           <div className="w-24 h-1 bg-trust-gold rounded"></div>
         </motion.div>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6" style={{ perspective: '1200px' }}>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6" style={{ perspective: '1200px' }}>
           {CATEGORIES.map((cat, idx) => (
             <motion.div
               key={cat.id}
@@ -569,8 +569,8 @@ export default function App() {
       </section>
 
       {/* BEST SELLERS PRODUCT SLIDER SECTION */}
-      <section className="py-20 bg-secondary-container/30 border-y border-outline-variant">
-        <div className="px-4 md:px-16 max-w-[1440px] mx-auto space-y-8">
+      <section className="py-12 sm:py-16 lg:py-20 bg-secondary-container/30 border-y border-outline-variant">
+        <div className="px-4 sm:px-6 lg:px-16 max-w-[1440px] mx-auto space-y-8">
           <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-4 border-b border-outline-variant pb-6">
             <div className="space-y-2">
               <span className="text-[10px] tracking-widest font-bold text-trust-gold bg-primary-container/10 px-3 py-1 rounded-md uppercase">
@@ -628,8 +628,8 @@ export default function App() {
       </section>
 
       {/* NEW LAUNCHES SECTION */}
-      <section className="py-20 px-4 md:px-16 max-w-[1440px] mx-auto space-y-12">
-        <div className="flex flex-col md:flex-row justify-between items-end gap-4 border-b border-outline-variant pb-6">
+      <section className="py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-16 max-w-[1440px] mx-auto space-y-8 sm:space-y-10 lg:space-y-12">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-4 border-b border-outline-variant pb-6">
           <div className="space-y-2">
             <span className="text-[10px] tracking-widest font-bold text-primary bg-primary/10 px-3 py-1 rounded-md uppercase">
               Innovative Botanical Synthesis
@@ -661,8 +661,8 @@ export default function App() {
       </section>
 
       {/* DETAILED DYNAMIC CATALOGUE GRID SECTION WITH ACTIVE FILTERS */}
-      <section id="catalogue-section" className="py-20 bg-background border-t border-outline-variant">
-        <div className="px-4 md:px-16 max-w-[1440px] mx-auto space-y-8">
+      <section id="catalogue-section" className="py-12 sm:py-16 lg:py-20 bg-background border-t border-outline-variant">
+        <div className="px-4 sm:px-6 lg:px-16 max-w-[1440px] mx-auto space-y-8">
           <div className="text-center space-y-2">
             <h2 className="font-headline text-3xl font-bold text-primary">Interactive Product Catalog</h2>
             <p className="text-xs text-text-muted">Filter our lab coordinates by skin, hair, bathing or systemic concerns.</p>
@@ -783,13 +783,13 @@ export default function App() {
       </section>
 
       {/* INTERACTIVE AYURVEDIC CLINICAL QUIZ PORTAL */}
-      <section id="quiz-section" className="py-20 px-4 md:px-16 max-w-[1440px] mx-auto">
+      <section id="quiz-section" className="py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-16 max-w-[1440px] mx-auto">
         <Quiz onAddToCart={handleAddToCart} onSelectProduct={setSelectedProduct} />
       </section>
 
       {/* TRANSPARENCY BEAUTY SECTION */}
-      <section className="py-20 bg-background border-t border-outline-variant overflow-hidden">
-        <div className="px-4 md:px-16 max-w-[1440px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+      <section className="py-12 sm:py-16 lg:py-20 bg-background border-t border-outline-variant overflow-hidden">
+        <div className="px-4 sm:px-6 lg:px-16 max-w-[1440px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 sm:gap-12 lg:gap-16 items-center">
           {/* Left Column Image with floating organic badge */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
@@ -801,7 +801,7 @@ export default function App() {
             <div className="aspect-square bg-primary/5 rounded-[40px] absolute -top-10 -left-10 w-3/4 -z-10"></div>
             <div className="rounded-xl overflow-hidden shadow-md relative border border-outline-variant">
               <img
-                src="/src/assets/images/radiant_skin_beauty_1783355307569.jpg"
+                src={productImages.radiantSkinBeauty}
                 alt="Ayurvedic woman"
                 referrerPolicy="no-referrer"
                 className="w-full aspect-[4/5] object-cover"
@@ -813,7 +813,7 @@ export default function App() {
               whileInView={{ opacity: 1, scale: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.3, duration: 0.6 }}
-              className="absolute -bottom-8 -right-4 md:-right-8 bg-white p-6 rounded-xl shadow-md max-w-[260px] border border-outline-variant flex gap-3 items-start"
+              className="absolute -bottom-6 right-2 sm:-bottom-8 sm:-right-4 md:-right-8 bg-white p-4 sm:p-6 rounded-xl shadow-md max-w-[220px] sm:max-w-[260px] border border-outline-variant flex gap-3 items-start"
             >
               <ShieldCheck className="w-10 h-10 text-primary shrink-0" />
               <div>
@@ -868,14 +868,14 @@ export default function App() {
       </section>
 
       {/* TESTIMONIALS SLIDER SECTION */}
-      <section className="py-20 bg-primary text-white border-y border-primary-container">
-        <div className="px-4 md:px-16 max-w-[1440px] mx-auto space-y-12">
+      <section className="py-12 sm:py-16 lg:py-20 bg-primary text-white border-y border-primary-container">
+        <div className="px-4 sm:px-6 lg:px-16 max-w-[1440px] mx-auto space-y-8 sm:space-y-10 lg:space-y-12">
           <div className="text-center space-y-3">
             <h2 className="font-headline text-3xl font-bold text-white">What Our Customers Have To Say</h2>
             <p className="text-xs text-white/70 max-w-sm mx-auto">Real results and clinical feedback from individuals who trust Alloes.</p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8">
             {/* Review 1 */}
             <div className="bg-primary-container p-8 rounded-xl border border-white/10 flex flex-col justify-between h-full space-y-6">
               <div className="space-y-4">
@@ -937,8 +937,8 @@ export default function App() {
       </section>
 
       {/* TRUST BADGES VALUE PROPOSITIONS */}
-      <section className="py-12 bg-background border-y border-outline-variant text-primary">
-        <div className="px-4 md:px-16 max-w-[1440px] mx-auto grid grid-cols-2 md:grid-cols-5 gap-8">
+      <section className="py-10 sm:py-12 bg-background border-y border-outline-variant text-primary">
+        <div className="px-4 sm:px-6 lg:px-16 max-w-[1440px] mx-auto grid grid-cols-2 md:grid-cols-5 gap-6 sm:gap-8">
           <div className="text-center space-y-2">
             <span className="text-2xl text-primary inline-block">🚚</span>
             <h5 className="font-bold text-xs uppercase tracking-wider">Free Delivery</h5>
@@ -968,8 +968,8 @@ export default function App() {
       </section>
 
       {/* FOOTER */}
-      <footer className="bg-primary text-white pt-20 pb-8 border-t border-primary-container">
-        <div className="px-4 md:px-16 max-w-[1440px] mx-auto grid grid-cols-1 md:grid-cols-4 gap-12">
+      <footer className="bg-primary text-white pt-12 sm:pt-16 lg:pt-20 pb-8 border-t border-primary-container">
+        <div className="px-4 sm:px-6 lg:px-16 max-w-[1440px] mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10 lg:gap-12">
           {/* Logo, short bio and interactive newsletter */}
           <div className="space-y-6">
             <h3 className="font-headline text-2xl font-bold">Alloes Pharmaceuticals</h3>

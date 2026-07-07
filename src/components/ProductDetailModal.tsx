@@ -61,18 +61,18 @@ export default function ProductDetailModal({
           exit={{ opacity: 0, scale: 0.85, rotateY: 12, rotateX: -6, z: -150 }}
           transition={{ type: "spring", stiffness: 220, damping: 24 }}
           style={{ transformStyle: "preserve-3d" }}
-          className="relative bg-white rounded-xl shadow-2xl max-w-4xl w-full overflow-hidden z-10 grid grid-cols-1 md:grid-cols-2 max-h-[90vh] md:max-h-[85vh] border border-outline-variant"
+          className="relative bg-white rounded-xl shadow-2xl w-full max-w-4xl overflow-hidden z-10 flex flex-col lg:grid lg:grid-cols-2 max-h-[90vh] sm:max-h-[85vh] lg:max-h-[90vh] lg:h-[90vh] border border-outline-variant"
         >
           {/* Close button */}
           <button
             onClick={onClose}
-            className="absolute top-5 right-5 z-20 p-2 bg-secondary-container/40 hover:bg-secondary-container rounded-lg text-primary transition-colors hover:scale-105"
+            className="absolute top-2 right-2 sm:top-5 sm:right-5 z-20 p-1.5 sm:p-2 bg-secondary-container/40 hover:bg-secondary-container rounded-lg text-primary transition-colors hover:scale-105"
           >
-            <X className="w-5 h-5" />
+            <X className="w-4 h-4 sm:w-5 sm:h-5" />
           </button>
 
           {/* Left Column: Image and Badges */}
-          <div className="relative bg-secondary-container/10 flex items-center justify-center p-8 h-[350px] md:h-full">
+          <div className="relative bg-secondary-container/10 flex items-center justify-center p-3 sm:p-6 lg:p-8 min-h-[180px] sm:min-h-[280px] lg:h-full order-2 lg:order-1">
             {product.discount > 0 && (
               <span className="absolute top-5 left-5 bg-primary text-white text-[10px] font-bold px-3 py-1.5 rounded-md shadow-sm tracking-wider">
                 -{product.discount}% DISCOUNT
@@ -93,17 +93,17 @@ export default function ProductDetailModal({
           </div>
 
           {/* Right Column: Details */}
-          <div className="p-8 overflow-y-auto flex flex-col justify-between h-[500px] md:h-full">
-            <div>
-              <span className="text-xs font-bold tracking-widest text-primary uppercase bg-primary/10 px-3 py-1.5 rounded-md">
+          <div className="p-3 sm:p-6 lg:p-8 flex flex-col order-1 lg:order-2 max-h-[calc(90vh-200px)] sm:max-h-[calc(85vh-180px)] lg:max-h-none lg:h-full lg:overflow-hidden">
+            <div className="flex-1 min-h-0 overflow-y-auto pr-1">
+              <span className="text-[10px] sm:text-xs font-bold tracking-widest text-primary uppercase bg-primary/10 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-md">
                 Alloes {product.category} Formulation
               </span>
 
-              <h2 className="font-headline text-2xl md:text-3xl text-primary font-bold mt-4 leading-tight">
+              <h2 className="font-headline text-lg sm:text-2xl lg:text-3xl text-primary font-bold mt-2 sm:mt-4 leading-tight">
                 {product.name}
               </h2>
 
-              <div className="flex items-center gap-3 mt-3">
+              <div className="flex items-center gap-2 sm:gap-3 mt-2 sm:mt-3 flex-wrap">
                 <div className="flex items-center text-primary">
                   {[...Array(5)].map((_, i) => (
                     <Star
@@ -119,8 +119,8 @@ export default function ProductDetailModal({
               </div>
 
               {/* Price Tag */}
-              <div className="flex items-baseline gap-3 mt-4">
-                <span className="text-2xl font-bold text-primary">Rs. {product.price.toFixed(2)}</span>
+              <div className="flex items-baseline gap-2 sm:gap-3 mt-3 sm:mt-4 flex-wrap">
+                <span className="text-xl sm:text-2xl font-bold text-primary">Rs. {product.price.toFixed(2)}</span>
                 {product.originalPrice > product.price && (
                   <span className="text-sm text-text-muted line-through">
                     Rs. {product.originalPrice.toFixed(2)}
@@ -129,18 +129,18 @@ export default function ProductDetailModal({
               </div>
 
               {/* Description */}
-              <p className="text-sm text-on-surface-variant mt-4 leading-relaxed">
+              <p className="text-xs sm:text-sm text-on-surface-variant mt-2 sm:mt-4 leading-relaxed">
                 {product.description}
               </p>
 
               {/* Interaction Tabs */}
-              <div className="border-b border-outline-variant mt-6">
-                <div className="flex gap-4 overflow-x-auto pb-px scrollbar-none">
+              <div className="border-b border-outline-variant mt-2 sm:mt-4">
+                <div className="flex gap-2 sm:gap-4 overflow-x-auto pb-px scrollbar-none">
                   {(['benefits', 'ingredients', 'directions', 'reviews'] as const).map((tab) => (
                     <button
                       key={tab}
                       onClick={() => setActiveTab(tab)}
-                      className={`text-xs font-bold tracking-wider uppercase pb-2 px-1 border-b-2 transition-colors shrink-0 cursor-pointer ${
+                      className={`text-[10px] sm:text-xs font-bold tracking-wider uppercase pb-2 px-1 border-b-2 transition-colors shrink-0 cursor-pointer ${
                         activeTab === tab
                           ? 'border-primary text-primary'
                           : 'border-transparent text-text-muted hover:text-primary'
@@ -153,7 +153,7 @@ export default function ProductDetailModal({
               </div>
 
               {/* Tab Contents */}
-              <div className="py-4 text-sm text-on-surface-variant min-h-[140px] max-h-[220px] overflow-y-auto">
+              <div className="py-2 sm:py-3 text-xs sm:text-sm text-on-surface-variant min-h-[80px] sm:min-h-[100px] max-h-[150px] sm:max-h-[180px] overflow-y-auto">
                 {activeTab === 'benefits' && (
                   <div className="space-y-3">
                     <div className="flex gap-2 items-start bg-secondary-container/30 p-4 rounded-lg border border-outline-variant">
@@ -294,21 +294,21 @@ export default function ProductDetailModal({
             </div>
 
             {/* Bottom Actions */}
-            <div className="border-t border-outline-variant pt-6 mt-4">
-              <div className="flex items-center gap-4">
-                <div className="flex items-center border border-outline-variant rounded-lg bg-secondary-container/20 h-12">
+            <div className="border-t border-outline-variant pt-2 sm:pt-4 mt-2 sm:mt-4 flex-shrink-0">
+              <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-3">
+                <div className="flex items-center border border-outline-variant rounded-lg bg-secondary-container/20 h-10 sm:h-12">
                   <button
                     onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                    className="px-3.5 py-1 text-primary font-bold hover:bg-secondary-container/50 transition-colors h-full cursor-pointer"
+                    className="px-2.5 sm:px-3.5 py-1 text-primary font-bold hover:bg-secondary-container/50 transition-colors h-full cursor-pointer text-sm"
                   >
                     -
                   </button>
-                  <span className="px-3 font-semibold text-primary min-w-[2.5rem] text-center">
+                  <span className="px-2 sm:px-3 font-semibold text-primary min-w-[2rem] text-center text-sm">
                     {quantity}
                   </span>
                   <button
                     onClick={() => setQuantity(quantity + 1)}
-                    className="px-3.5 py-1 text-primary font-bold hover:bg-secondary-container/50 transition-colors h-full cursor-pointer"
+                    className="px-2.5 sm:px-3.5 py-1 text-primary font-bold hover:bg-secondary-container/50 transition-colors h-full cursor-pointer text-sm"
                   >
                     +
                   </button>
@@ -316,10 +316,10 @@ export default function ProductDetailModal({
 
                 <button
                   onClick={handleAddToCart}
-                  className="flex-1 bg-primary hover:bg-primary-container text-white h-12 rounded-lg font-bold uppercase tracking-wider text-xs flex items-center justify-center gap-2 transition-colors shadow-sm hover:shadow-md cursor-pointer"
+                  className="flex-1 bg-primary hover:bg-primary-container text-white h-10 sm:h-12 rounded-lg font-bold uppercase tracking-wider text-[11px] sm:text-xs flex items-center justify-center gap-1.5 sm:gap-2 transition-colors shadow-sm hover:shadow-md cursor-pointer min-w-0"
                 >
-                  <ShoppingCart className="w-4 h-4 text-white" />
-                  Add to Prescription Cart
+                  <ShoppingCart className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-white shrink-0" />
+                  <span className="truncate">Add to Cart</span>
                 </button>
 
                 <button
@@ -330,11 +330,11 @@ export default function ProductDetailModal({
                       'info'
                     );
                   }}
-                  className={`p-3.5 border rounded-lg hover:bg-secondary-container/30 transition-colors cursor-pointer ${
+                  className={`p-2 sm:p-3 border rounded-lg hover:bg-secondary-container/30 transition-colors cursor-pointer shrink-0 h-10 sm:h-12 w-10 sm:w-12 flex items-center justify-center ${
                     isWishlisted ? 'border-primary/20 bg-primary/10 text-primary' : 'border-outline-variant text-primary'
                   }`}
                 >
-                  <Heart className={`w-5 h-5 ${isWishlisted ? 'fill-current' : ''}`} />
+                  <Heart className={`w-4 sm:w-5 h-4 sm:h-5 ${isWishlisted ? 'fill-current' : ''}`} />
                 </button>
               </div>
             </div>
